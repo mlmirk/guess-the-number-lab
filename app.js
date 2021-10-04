@@ -10,7 +10,7 @@ console.log(123)
 ////     - Hints:
 //////         - This is a great use case for a `while` loop.
 ////         - `parseInt` returns `NaN` if the string cannot be parsed into a number.
-// 4. From within the `play` method, invoke the `getGuess` method from inside a loop, and add the new guess to the `prevGuesses` array.
+//// 4. From within the `play` method, invoke the `getGuess` method from inside a loop, and add the new guess to the `prevGuesses` array.
 //     - Hint: this is an excellent use for a while loop (or even a do...while loop!)
 // 5. Add a `render` method to `game` that `play` will call after a guess has been made that alerts:
 //     - If the secret has been guessed: `Congrats! You guessed the number in [number of prevGuesses]!`
@@ -44,7 +44,9 @@ const game = {
     let guess 
 
     
-//while loop
+//while loop while any condition in the loop is true keep running 
+//so if its below or above the range keep asking, if its not a number keep asking 
+//will not take a value that doesnt conform to our data standard 
 
   while(guess>this.biggestNum || guess<this.smallestNum || isNaN(guess)){
     guess =parseInt( prompt(`Enter a guess between ${this.smallestNum} and ${this.biggestNum} to start to play`))
@@ -60,53 +62,54 @@ const game = {
     this.secretNum = Math.floor(Math.random() * (this.biggestNum - this.smallestNum + 1)) + this.smallestNum;
     let win=false
     do{
-
+        
       this.prevGuesses.push(this.getGuess())
-      if(this.prevGuesses[this.prevGuesses.length-1]> this.secretNum){
-        this.render(this.prevGuesses,this.secretNum,win)
-
-
-      }else if(this.prevGuesses[this.prevGuesses.length-1]< this.secretNum){
-        this.render(this.prevGuesses,this.secretNum,win)
-
-
-      }
+      this.render(this.secretNum)
 
     }while(this.prevGuesses[this.prevGuesses.length-1] 
       !== this.secretNum)
-    win = true
-    this.render(this.prevGuesses,this.secretNum,win)
+
+    
 
 console.log(this.secretNum)
 //console.log(this.prevGuesses)
 
-    }
-
-,
-render : function(arrP,secret,win){
-
-  if(win === false && arrP[arrP.length-1]<secret ){
+    },
+render : function(x){
+  let guessString= this.prevGuesses.join(', ')
+ console.log(x)
+ 
+  if(this.prevGuesses[this.prevGuesses.length-1]< x){
   
-    return`you did not guess right, your guess was to low`
+    alert(`you did not guess right, your guess was to low you previous guesses are ${guessString}`)
   
-  }else if(win === false && arrP[arrP.length-1]>secret ){
+  }else if(this.prevGuesses[this.prevGuesses.length-1]> x){
+    console.log('high')
+    window.alert(`you did not guess right, your guess was to high you previous guesses are ${guessString}`)
 
-    return `you did not guess right, your guess was to high`
-  
-  }else{
+  }else if(x ===this.prevGuesses[this.prevGuesses.length-1]){
+    console.log('right')
+    window.alert(`you win you got it in ${this.prevGuesses.length} tries`)
 
-  return `winner winner chicken dinner you got it in ${arrP.length} guesses`
   }
-
 }
+
+  // if(win === false && arrP[arrP.length-1]<secret ){
   
+  //   alert(`you did not guess right, your guess was to low you pr`)
+  
+  // }else if(win === false && arrP[arrP.length-1]>secret ){
 
+  //   return `you did not guess right, your guess was to high`
+  
+  // }else{
 
-
-
-
+  // return `winner winner chicken dinner you got it in ${arrP.length} guesses`
+  // }
 
 }
+
+game.play()
 
 // function printGuesses(arr){
 // let printStr='Your previous guesses are '
@@ -129,5 +132,5 @@ render : function(arrP,secret,win){
   
 //  }
 
-game.play()
+
 

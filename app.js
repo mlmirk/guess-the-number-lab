@@ -57,14 +57,15 @@ const game = {
 
     },
 
-
+    //play function will create a new secret number
+    //then will call other functions getGuess() and render that will check values
     play: function() {
     this.secretNum = Math.floor(Math.random() * (this.biggestNum - this.smallestNum + 1)) + this.smallestNum;
     let win=false
     do{
         
       this.prevGuesses.push(this.getGuess())
-      this.render(this.secretNum)
+      this.render(this.secretNum) //render will do the math 
 
     }while(this.prevGuesses[this.prevGuesses.length-1] 
       !== this.secretNum)
@@ -75,37 +76,29 @@ console.log(this.secretNum)
 //console.log(this.prevGuesses)
 
     },
+
+//render function will create alerts based on the users guess. 
+//promt message with string of previous guess if wrong 
+//if guess is correct return number of guesses and a winner message
+//called by the play function 
 render : function(x){
   let guessString= this.prevGuesses.join(', ')
- console.log(x)
- 
-  if(this.prevGuesses[this.prevGuesses.length-1]< x){
-  
-    alert(`you did not guess right, your guess was to low you previous guesses are ${guessString}`)
-  
-  }else if(this.prevGuesses[this.prevGuesses.length-1]> x){
-    console.log('high')
-    window.alert(`you did not guess right, your guess was to high you previous guesses are ${guessString}`)
+ //console.log(x)
 
-  }else if(x ===this.prevGuesses[this.prevGuesses.length-1]){
-    console.log('right')
-    window.alert(`you win you got it in ${this.prevGuesses.length} tries`)
+if(this.prevGuesses[this.prevGuesses.length-1]< x){
+  
+    alert(`Your guess was to low you previous guesses are ${guessString}`)
+  
+}else if(this.prevGuesses[this.prevGuesses.length-1]> x){
+
+    window.alert(`Your guess was to high you previous guesses are ${guessString}`)
+
+}else if(x ===this.prevGuesses[this.prevGuesses.length-1]){
+
+    window.alert(`Winner, winner, chicken dinner you did it in ${this.prevGuesses.length} tries`)
 
   }
 }
-
-  // if(win === false && arrP[arrP.length-1]<secret ){
-  
-  //   alert(`you did not guess right, your guess was to low you pr`)
-  
-  // }else if(win === false && arrP[arrP.length-1]>secret ){
-
-  //   return `you did not guess right, your guess was to high`
-  
-  // }else{
-
-  // return `winner winner chicken dinner you got it in ${arrP.length} guesses`
-  // }
 
 }
 
@@ -133,4 +126,15 @@ game.play()
 //  }
 
 
+  // if(win === false && arrP[arrP.length-1]<secret ){
+  
+  //   alert(`you did not guess right, your guess was to low you pr`)
+  
+  // }else if(win === false && arrP[arrP.length-1]>secret ){
 
+  //   return `you did not guess right, your guess was to high`
+  
+  // }else{
+
+  // return `winner winner chicken dinner you got it in ${arrP.length} guesses`
+  // }
